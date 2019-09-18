@@ -1,0 +1,34 @@
+{
+  "$schema": "https://choria.io/schemas/mcorpc/ddl/v1/agent.json",
+  "metadata": {
+    "license": "Apache-2.0",
+    "author": "Ben Roberts",
+    "timeout": 900,
+    "name": "puppet_env",
+    "version": "0.1",
+    "url": "https://github.com/optiz0r/puppet-env-agent",
+    "description": "Triggers updates of puppetserver environments using puppet-env-manager library",
+    "provider": "external"
+  },
+  "actions": [
+    {
+      "action": "update_all",
+      "input": {
+        "force": {
+          "prompt": "Force",
+          "description": "Forces update of modules even if no changes were detected (can be slow)",
+          "type": "boolean",
+          "default": false,
+          "optional": true,
+          "validation": "",
+          "maxlength": 0,
+          "list": null
+        }
+      },
+      "output": {},
+      "display": "always",
+      "description": "Updates all environments",
+      "aggregate": []
+    }
+  ]
+}

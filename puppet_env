@@ -1,0 +1,51 @@
+#!/usr/bin/python
+
+import logging
+import os
+
+from distutils.spawn import find_executable
+from mco_agent import Agent, action, dispatch, register_actions
+from puppet_env_manager.config import EnvironmentManagerConfig
+from puppet_env_manager.manager import EnvironmentManager
+
+
+@register_actions
+class PuppetEnv(Agent):
+
+    PATH = '/usr/bin:/usr/sbin:/bin:/sbin'
+
+    def should_activate(self):
+        pem_exe = find_executable('puppet-env-manager', os.environ.get('PATH', self.PATH))
+        if pem_exe is None:
+            self.logger.debug("Did not find puppet-env-manager, disabling")
+            return False
+        else:
+            self.logger.debug("Found puppet-env-manager at {0}, enabling".format(pem_exe))
+            return True
+
+    @action
+    def update_all(self):
+        """ Updates all puppet environments on a puppetserver
+        """
+        # Since py-mco-agent disables all logging by default
+        # Re-enable logging for the environment manager library
+        logging.getLogger('puppet_env_manager').setLevel(self.logger.getEffectiveLevel())
+
+        # Librarian requires some environment variables be set
+        os.environ.setdefault('HOME', '/root')
+        os.environ.setdefault('PATH', self.PATH)
+
+        self.logger.debug("Loading PEM configuration")
+        config_file = self.config.get('config_file', '/etc/puppet-env-manager/config.yaml')
+        pem_config = EnvironmentManagerConfig(path=config_file)
+        pem_config.load()
+
+        manager = EnvironmentManager(**pem_config.get_config())
+
+        self.logger.debug("Starting update_all")
+        manager.update_all_environments(force=self.request.data.get('force', False))
+        self.logger.debug("Finished update_all")
+
+
+if __name__ == '__main__':
+    dispatch(PuppetEnv)
