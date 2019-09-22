@@ -3,7 +3,8 @@ metadata :name        => "puppet_env",
          :author      => "Ben Roberts",
          :license     => "Apache-2.0",
          :version     => "0.1",
-         :url         => "https://github.com/optiz0r/puppet-env-manager-agent",
+         :url         => "https://github.com/optiz0r/puppet-env-agent",
+         :provider    => "external",
          :timeout     => 900
 
 
@@ -16,4 +17,33 @@ action "update_all", :description => "Updates all environments" do
         :type        => :boolean,
         :optional    => true
 
+
+
+
+  output :added,
+         :description => "List of environments added",
+         :display_as  => "Added",
+         :type        => ""
+
+  output :failed,
+         :description => "List of environments failed",
+         :display_as  => "Failed",
+         :type        => ""
+
+  output :removed,
+         :description => "List of environments removed",
+         :display_as  => "Removed",
+         :type        => ""
+
+  output :unchanged,
+         :description => "List of environments unchanged",
+         :display_as  => "Unchanged",
+         :type        => ""
+
+  output :updated,
+         :description => "List of environments updated",
+         :display_as  => "Updated",
+         :type        => ""
+
 end
+

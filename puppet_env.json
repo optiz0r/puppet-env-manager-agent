@@ -25,7 +25,33 @@
           "list": null
         }
       },
-      "output": {},
+      "output": {
+       "added": {
+          "description": "List of environments added",
+          "display_as": "Added",
+          "default": []
+        },
+        "updated": {
+          "description": "List of environments updated",
+          "display_as": "Updated",
+          "default": []
+        },
+        "removed": {
+          "description": "List of environments removed",
+          "display_as": "Removed",
+          "default": []
+        },
+        "unchanged": {
+          "description": "List of environments unchanged",
+          "display_as": "Unchanged",
+          "default": []
+        },
+        "failed": {
+          "description": "List of environments failed",
+          "display_as": "Failed",
+          "default": []
+        }
+      },
       "display": "always",
       "description": "Updates all environments",
       "aggregate": []

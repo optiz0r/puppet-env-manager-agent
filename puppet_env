@@ -29,6 +29,7 @@ class PuppetEnv(Agent):
         """
         # Since py-mco-agent disables all logging by default
         # Re-enable logging for the environment manager library
+        logging.getLogger('.').setLevel(self.logger.getEffectiveLevel())
         logging.getLogger('puppet_env_manager').setLevel(self.logger.getEffectiveLevel())
 
         # Librarian requires some environment variables be set
@@ -43,7 +44,8 @@ class PuppetEnv(Agent):
         manager = EnvironmentManager(**pem_config.get_config())
 
         self.logger.debug("Starting update_all")
-        manager.update_all_environments(force=self.request.data.get('force', False))
+        results = manager.update_all_environments(force=self.request.data.get('force', False))
+        self.reply.data = results
         self.logger.debug("Finished update_all")
 
 
