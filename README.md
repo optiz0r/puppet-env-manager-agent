@@ -20,7 +20,7 @@ usually `/opt/puppetlabs/mcollective/plugins/mcollective/agent/` and restart `ch
 # Usage
 
 ```shell script
-choria req puppet_env update_all -v
+choria req puppet_env update_all
 ```
 
 ```text
@@ -29,7 +29,13 @@ Discovering nodes .... 1
 1 / 1    0s [====================================================================] 100%
 
 puppetserver.example.com
-   {}
+
+       Added: []
+      Failed: []
+     Removed: []
+   Unchanged: ["development", "production"]
+     Updated: []
+
 
 ---- request stats ----
                Nodes: 1 / 1
@@ -41,4 +47,47 @@ Unexpected Responses: 0
         Publish Time: 0s
           Agent Time: 3m8.087353344s
           Total Time: 3m10.087806976s
+```
+
+Or with JSON output for integration into other tools:
+```shell script
+choria req puppet_env update_all -j
+```
+
+```text
+{
+   "agent": "puppet_env",
+   "action": "update_all",
+   "replies": [
+      {
+         "sender": "puppetserver.example.com",
+         "statuscode": 0,
+         "statusmsg": "",
+         "data": {
+            "added": [],
+            "failed": [],
+            "removed": [],
+            "unchanged": [
+               "production",
+               "development"
+            ],
+            "updated": []
+         }
+      }
+   ],
+   "request_stats": {
+      "requestid": "d8ca514f6ed3498d9d553621f8407e37",
+      "no_responses": [],
+      "unexpected_responses": [],
+      "discovered": 1,
+      "failed": 0,
+      "ok": 1,
+      "responses": 1,
+      "publish_time": 0,
+      "request_time": 1.9469804,
+      "discover_time": 2.0011542,
+      "start_time_utc": 1569490017
+   },
+   "summaries": {}
+}
 ```
