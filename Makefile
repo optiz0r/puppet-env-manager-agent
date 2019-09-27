@@ -31,7 +31,7 @@ ${DIST_DIR}/${MODULE_FILE}: puppet/CHANGELOG.md puppet/LICENSE agent/puppet_env.
 	mv ${MODULE_FILE} ${DIST_DIR}/
 
 publish: ${DIST_DIR}/${MODULE_FILE}
-	curl -X POST --header "Authoriztion: Bearer ${FORGE_TOKEN}" --upload-file ${DIST_DIR}/${MODULE_FILE} ${FORGE_URL}
+	curl -X POST --header "Authorization: Bearer ${FORGE_TOKEN}" -F file=@${DIST_DIR}/${MODULE_FILE} ${FORGE_URL}
 
 clean:
 	find puppet -mindepth 1 -delete
