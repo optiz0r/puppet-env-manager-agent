@@ -9,13 +9,27 @@ using [py-mco-agent](https://github.com/optiz0r/py-mco-agent)
 
 # Requirements
 
-* `puppet-env-manager` (closed source for the moment)
-* `choria>=0.14`
+* [py-mco-agent](https://github.com/optiz0r/py-mco-agent) `>=0.3.3`
+* [puppet-env-manager](https://github.com/optiz0r/puppet-env-manager) '>=0.4.3'
+* [choria](https://choria.io) `>=0.16.1`
 
 # Installation
 
-Copy `puppet_env`, `puppet_env.json` and `puppet_env.ddl` to the mcollective agent directory,
-usually `/opt/puppetlabs/mcollective/plugins/mcollective/agent/` and restart `choria-server`.
+This project is packaged up as a puppet module and published to the forge as
+`optiz0r-mcollective_agent_puppet_env`. The easiest way to use it is to add this module
+to your `Puppetfile`:
+
+```text
+mod "optiz0r-mcollective_agent_puppet_env"
+```
+
+And `mcollective::plugin_classes` list in hiera:
+
+```yaml
+mcollective::plugin_classes:
+  - mcollective_agent_puppet_env
+```
+
 
 # Usage
 
