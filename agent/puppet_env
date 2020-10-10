@@ -49,5 +49,38 @@ class PuppetEnv(Agent):
         self.logger.debug("Finished update_all")
 
 
+    @action
+    def update(self):
+        """ Updates a single puppet environment on a puppetserver
+        """
+        # Since py-mco-agent disables all logging by default
+        # Re-enable logging for the environment manager library
+        logging.getLogger('.').setLevel(self.logger.getEffectiveLevel())
+        logging.getLogger('puppet_env_manager').setLevel(self.logger.getEffectiveLevel())
+
+        # Librarian requires some environment variables be set
+        os.environ.setdefault('HOME', '/root')
+        os.environ.setdefault('PATH', self.PATH)
+
+        self.logger.debug("Loading PEM configuration")
+        config_file = self.config.get('config_file', '/etc/puppet-env-manager/config.yaml')
+        pem_config = EnvironmentManagerConfig(path=config_file)
+        pem_config.load()
+
+        manager = EnvironmentManager(**pem_config.get_config())
+        environment = self.request.data.get('environment')
+
+        self.logger.debug("Starting update of {0}".format(environment))
+        try:
+            manager.update_single_environments(
+                    environment=environment,
+                    force=self.request.data.get('force', False))
+        except EnvironmentManagerException as ex:
+            self.reply.statuscode = 5
+            self.reply.statusmsg = 'Error updating environment: {0}'.format(str(ex))
+
+        self.logger.debug("Finished update of {0}".format(environment))
+
+
 if __name__ == '__main__':
     dispatch(PuppetEnv)

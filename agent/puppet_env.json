@@ -5,7 +5,7 @@
     "author": "Ben Roberts",
     "timeout": 900,
     "name": "puppet_env",
-    "version": "0.1.4",
+    "version": "0.2.0",
     "url": "https://github.com/optiz0r/puppet-env-manager-agent",
     "description": "Triggers updates of puppetserver environments using puppet-env-manager library",
     "provider": "external"
@@ -54,6 +54,35 @@
       },
       "display": "always",
       "description": "Updates all environments",
+      "aggregate": []
+    },
+    {
+      "action": "update",
+      "input": {
+        "environment": {
+          "prompt": "Environment Name",
+          "description": "Name of the environment to update",
+          "type": "string",
+          "default": "",
+          "optional": false,
+          "validation": "^[a-zA-Z][a-zA-Z0-9_]+$",
+          "maxlength": 64,
+          "list": null
+        },
+        "force": {
+          "prompt": "Force",
+          "description": "Forces update of modules even if no changes were detected (can be slow)",
+          "type": "boolean",
+          "default": false,
+          "optional": true,
+          "validation": "",
+          "maxlength": 0,
+          "list": null
+        }
+      },
+      "output": {},
+      "display": "always",
+      "description": "Updates the given environment",
       "aggregate": []
     }
   ]
