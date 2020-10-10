@@ -73,7 +73,7 @@ class PuppetEnv(Agent):
 
         self.logger.debug("Starting update of {0}".format(environment))
         try:
-            manager.update_single_environments(
+            manager.update_single_environment(
                     environment=environment,
                     force=self.request.data.get('force', False))
         except EnvironmentManagerException as ex:

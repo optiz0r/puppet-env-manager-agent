@@ -5,7 +5,7 @@
     "author": "Ben Roberts",
     "timeout": 900,
     "name": "puppet_env",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "url": "https://github.com/optiz0r/puppet-env-manager-agent",
     "description": "Triggers updates of puppetserver environments using puppet-env-manager library",
     "provider": "external"
