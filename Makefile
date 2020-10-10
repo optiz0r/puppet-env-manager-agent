@@ -17,6 +17,10 @@ agent/puppet_env.json:
 agent/puppet_env.ddl: agent/puppet_env.json
 	choria tool generate ddl agent/puppet_env.json agent/puppet_env.ddl
 
+.PHONY: ddl
+ddl:
+	choria tool generate ddl agent/puppet_env.json agent/puppet_env.ddl
+
 puppet/CHANGELOG.md: CHANGELOG.md
 	cp CHANGELOG.md puppet/
 

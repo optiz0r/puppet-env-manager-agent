@@ -76,6 +76,10 @@ class PuppetEnv(Agent):
             manager.update_single_environment(
                     environment=environment,
                     force=self.request.data.get('force', False))
+
+            if self.request.data.get('clean', False):
+                manager.cleanup_environments()
+
         except EnvironmentManagerException as ex:
             self.reply.statuscode = 5
             self.reply.statusmsg = 'Error updating environment: {0}'.format(str(ex))

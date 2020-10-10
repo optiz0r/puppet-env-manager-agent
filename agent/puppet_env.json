@@ -5,7 +5,7 @@
     "author": "Ben Roberts",
     "timeout": 900,
     "name": "puppet_env",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "url": "https://github.com/optiz0r/puppet-env-manager-agent",
     "description": "Triggers updates of puppetserver environments using puppet-env-manager library",
     "provider": "external"
@@ -67,6 +67,16 @@
           "optional": false,
           "validation": "^[a-zA-Z][a-zA-Z0-9_]+$",
           "maxlength": 64,
+          "list": null
+        },
+        "clean": {
+          "prompt": "Clean",
+          "description": "Also cleanup any environments which should no longer be present (useful for CI/CD)",
+          "type": "boolean",
+          "default": false,
+          "optional": true,
+          "validation": "",
+          "maxlength": 0,
           "list": null
         },
         "force": {
