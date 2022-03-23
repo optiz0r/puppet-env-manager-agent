@@ -11,6 +11,7 @@ using [py-mco-agent](https://github.com/optiz0r/py-mco-agent)
 
 * [py-mco-agent](https://github.com/optiz0r/py-mco-agent) `>=0.3.3`
 * [puppet-env-manager](https://github.com/optiz0r/puppet-env-manager) '>=0.4.3'
+* [python](https://www.python.org/) `>=3`
 * [choria](https://choria.io) `>=0.16.1`
 
 # Installation
