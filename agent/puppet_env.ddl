@@ -2,7 +2,7 @@ metadata :name        => "puppet_env",
          :description => "Triggers updates of puppetserver environments using puppet-env-manager library",
          :author      => "Ben Roberts",
          :license     => "Apache-2.0",
-         :version     => "0.2.3",
+         :version     => "0.3.0",
          :url         => "https://github.com/optiz0r/puppet-env-manager-agent",
          :provider    => "external",
          :timeout     => 900
@@ -69,6 +69,26 @@ action "update", :description => "Updates the given environment" do
 
 
 
+
+end
+
+action "revision", :description => "Get current revision of the given environment" do
+  display :always
+
+  input :environment,
+        :prompt      => "Environment Name",
+        :description => "Name of the environment to update",
+        :type        => :string,
+        :validation  => '^[a-zA-Z][a-zA-Z0-9_]+$',
+        :maxlength   => 64,
+        :optional    => false
+
+
+
+
+  output :revision,
+         :description => "Current git commit hash of the environment",
+         :display_as  => "Revision"
 
 end
 
